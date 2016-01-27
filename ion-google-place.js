@@ -20,14 +20,14 @@ angular.module('ion-google-place', [])
                 },
                 link: function(scope, element, attrs, ngModel) {
                     var unbindBackButtonAction;
-
+					console.log(attrs);
                     scope.locations = [];
                     var geocoder = new google.maps.Geocoder();
                     var searchEventTimeout = undefined;
 
                     scope.displayCurrentLocation = false;
                     scope.currentLocation = scope.currentLocation === "true"? true:false;
-                    
+
                     if(!!navigator.geolocation && scope.currentLocation){
                         scope.displayCurrentLocation = true;
                     }
@@ -36,16 +36,16 @@ angular.module('ion-google-place', [])
                             '<div class="bar bar-header item-input-inset">',
                                 '<label class="item-input-wrapper">',
                                     '<i class="icon ion-ios7-search placeholder-icon"></i>',
-                                    '<input class="google-place-search" type="search" ng-model="searchQuery" placeholder="' + (attrs.searchPlaceholder || 'Enter an address, place or ZIP code') + '">',
+                                    '<input class="google-place-search" type="search" ng-model="searchQuery" placeholder="' + (attrs.placeholder || 'Enter an address, place or ZIP code') + '">',
                                 '</label>',
                                 '<button class="button button-clear">',
-                                    attrs.labelCancel || 'Cancel',
+                                    attrs.labelcancel || 'Cancel',
                                 '</button>',
                             '</div>',
                             '<ion-content class="has-header has-header">',
                                 '<ion-list>',
                                     '<ion-item type="item-text-wrap" ng-click="setCurrentLocation()" ng-if="displayCurrentLocation">',
-                                        'Use current location',
+                                        attrs.labelcurrentlocation || 'Use current location',
                                     '</ion-item>',
                                     '<ion-item ng-repeat="location in locations" type="item-text-wrap" ng-click="selectLocation(location)">',
                                         '{{location.formatted_address}}',
@@ -78,8 +78,9 @@ angular.module('ion-google-place', [])
                         };
 
                         scope.setCurrentLocation = function(){
+	                        console.log(attrs);
                             var location = {
-                                formatted_address: 'getting current location...'
+                                formatted_address: attrs.labelgetting || 'getting current location...'
                             };
                             ngModel.$setViewValue(location);
                             ngModel.$render();
