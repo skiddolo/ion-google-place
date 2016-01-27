@@ -35,3 +35,7 @@ You can in this version have the current location by adding to the directive "io
 example:  `<ion-google-place placeholder="Enter an address, Apt# and ZIP" ng-model="location" current-location="true" />`
 
 the acceptable value fot the attribute currentLocation are true or false.
+
+Added many scope for text, like:
+
+`<ion-google-place placeholder="Dove?" labelCancel="Annulla" labelgetting="Acquisisco posizione..." labelCurrentLocation="Usa posizione attuale" current-location="true" ng-model="event.where" required/>`
